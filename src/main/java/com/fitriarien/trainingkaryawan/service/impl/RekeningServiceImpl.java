@@ -18,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
@@ -36,6 +37,7 @@ public class RekeningServiceImpl implements RekeningService {
     @Autowired
     private RekeningRepository rekeningRepository;
 
+    @Transactional
     @Override
     public RekeningResponse insertRekening(CreateRekeningRequest request) {
         validationService.validate(request);
@@ -54,6 +56,7 @@ public class RekeningServiceImpl implements RekeningService {
         return toResponse(createdRekening);
     }
 
+    @Transactional
     @Override
     public RekeningResponse updateRekening(UpdateRekeningRequest request) {
         validationService.validate(request);
@@ -92,6 +95,7 @@ public class RekeningServiceImpl implements RekeningService {
         }
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Page<RekeningResponse> getAll(int page, int size) {
         Pageable data = PageRequest.of(page,size, Sort.by(Sort.Order.asc("id")));
@@ -99,6 +103,7 @@ public class RekeningServiceImpl implements RekeningService {
         return list.map(this::toResponse);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public RekeningResponse getById(Long id) {
         Rekening rekening = rekeningRepository.findById(id)
@@ -107,6 +112,7 @@ public class RekeningServiceImpl implements RekeningService {
         return toResponse(rekening);
     }
 
+    @Transactional
     @Override
     public void deleteRekening(Long id) {
         Rekening rekening = rekeningRepository.findById(id)

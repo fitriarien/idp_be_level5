@@ -64,7 +64,6 @@ public class Oauth2AuthorizationServerConfiguration extends AuthorizationServerC
         endpoints.authenticationManager(authenticationManager)
                 .tokenStore(tokenStore)
                 .accessTokenConverter(accessTokenConverter)
-                .userDetailsService(userDetailsService)
-                ;
+                .userDetailsService(userDetailsService);
     }
 }

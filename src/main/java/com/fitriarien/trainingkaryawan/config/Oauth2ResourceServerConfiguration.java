@@ -35,10 +35,6 @@ public class Oauth2ResourceServerConfiguration extends ResourceServerConfigurerA
                             "/swagger-ui/**","/swagger-ui.html","/v3/api-docs/**","/user-login/**",
                             "/forget-password/**", "/oauth/authorize**", "/login**", "/error**")
                     .permitAll()
-//                .antMatchers("/v1/role-test-global/list-barang").hasAnyAuthority("ROLE_READ")
-//                .antMatchers("/v1/role-test-global/post-barang").hasAnyAuthority("ROLE_WRITE")
-//                .antMatchers("/v1/role-test-global/post-barang-user").hasAnyAuthority("ROLE_USER")
-//                .antMatchers("/v1/role-test-global/post-barang-admin").hasAnyAuthority("ROLE_ADMIN")
                 .and()
                 .authorizeRequests()
                     .anyRequest()

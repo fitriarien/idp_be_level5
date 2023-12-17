@@ -19,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
@@ -42,6 +43,7 @@ public class KaryawanTrainingServiceImpl implements KaryawanTrainingService {
     @Autowired
     private TrainingRepository trainingRepository;
 
+    @Transactional
     @Override
     public KaryawanTraining create(CreateKaryawanTrainingRequest request) {
         validationService.validate(request);
@@ -72,6 +74,7 @@ public class KaryawanTrainingServiceImpl implements KaryawanTrainingService {
         return karyawanTrainingRepository.save(karyawanTraining);
     }
 
+    @Transactional
     @Override
     public KaryawanTraining update(UpdateKaryawanTrainingRequest request) {
         validationService.validate(request);
@@ -96,6 +99,7 @@ public class KaryawanTrainingServiceImpl implements KaryawanTrainingService {
         return karyawanTrainingRepository.save(karyawanTraining);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Page<KaryawanTraining> getAll(int page, int size) {
         Pageable data = PageRequest.of(page,size, Sort.by(Sort.Order.asc("id")));
@@ -103,6 +107,7 @@ public class KaryawanTrainingServiceImpl implements KaryawanTrainingService {
         return list;
     }
 
+    @Transactional(readOnly = true)
     @Override
     public KaryawanTraining getById(Long id) {
         KaryawanTraining karyawanTraining = karyawanTrainingRepository.findById(id)
@@ -111,6 +116,7 @@ public class KaryawanTrainingServiceImpl implements KaryawanTrainingService {
         return karyawanTraining;
     }
 
+    @Transactional
     @Override
     public void delete(Long id) {
         KaryawanTraining karyawanTraining = karyawanTrainingRepository.findById(id)

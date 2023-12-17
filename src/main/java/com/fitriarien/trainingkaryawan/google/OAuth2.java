@@ -37,7 +37,7 @@ public class OAuth2 {
      * {@code null} or blank, the application will log a warning. Suggested format
      * is "MyCompany-ProductName/1.0".
      */
-    private static final String APPLICATION_NAME = "";
+    private static final String APPLICATION_NAME = "Training Karyawan";
     /** Directory to store user credentials. */
     private static final java.io.File DATA_STORE_DIR = new java.io.File(System.getProperty("user.home"),
             ".store/oauth2_sample");
@@ -65,11 +65,11 @@ public class OAuth2 {
     private static Credential authorize() throws Exception {
         // load client secrets
         clientSecrets = GoogleClientSecrets.load(JSON_FACTORY,
-                new InputStreamReader(Objects.requireNonNull(OAuth2.class.getResourceAsStream("/client_secret.json"))));
+                new InputStreamReader(Objects.requireNonNull(OAuth2.class.getResourceAsStream("/client_secret_1.json"))));
         if (clientSecrets.getDetails().getClientId().startsWith("Enter")
                 || clientSecrets.getDetails().getClientSecret().startsWith("Enter ")) {
             System.out.println("Enter Client ID and Secret from https://code.google.com/apis/console/ "
-                    + "into oauth2-cmdlinesample/src/main/resources/client_secret.json");
+                    + "into oauth2-cmdlinesample/src/main/resources/client_secret_1.json");
             System.exit(1);
         }
         // set up authorization code flow
@@ -88,7 +88,7 @@ public class OAuth2 {
             // set up global Oauth2 instance
             oauth2 = new Oauth2.Builder(httpTransport, JSON_FACTORY, credential).setApplicationName(APPLICATION_NAME)
                     .build();
-            System.out.println("token saya = " + credential.getAccessToken());
+            System.out.println("token = " + credential.getAccessToken());
             // run commands
             tokenInfo(credential.getAccessToken());
             credential.getExpiresInSeconds();

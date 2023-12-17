@@ -17,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
@@ -36,6 +37,7 @@ public class KaryawanServiceImpl implements KaryawanService {
     @Autowired
     private DetailKaryawanRepository detailKaryawanRepository;
 
+    @Transactional
     @Override
     public Karyawan insertKaryawanAndDetail(CreateKaryawanRequest request) {
         validationService.validate(request);
@@ -60,6 +62,7 @@ public class KaryawanServiceImpl implements KaryawanService {
         return newKaryawan;
     }
 
+    @Transactional
     @Override
     public Karyawan updateKaryawanAndDetail(UpdateKaryawanRequest request) {
         validationService.validate(request);
@@ -105,6 +108,7 @@ public class KaryawanServiceImpl implements KaryawanService {
         return updatedKaryawan;
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Page<Karyawan> getAll(int page, int size) {
         Pageable data = PageRequest.of(page,size, Sort.by(Sort.Order.asc("id")));
@@ -112,6 +116,7 @@ public class KaryawanServiceImpl implements KaryawanService {
         return list;
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Karyawan getById(Long id) {
         Karyawan karyawan = karyawanRepository.findById(id)
@@ -120,6 +125,7 @@ public class KaryawanServiceImpl implements KaryawanService {
         return karyawan;
     }
 
+    @Transactional
     @Override
     public void deleteKaryawan(Long id) {
         Karyawan karyawan = karyawanRepository.findById(id)

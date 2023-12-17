@@ -1,5 +1,5 @@
-package com.fitriarien.trainingkaryawan.config;//package com.dibimbing.dibimbing.config;
-//
+package com.fitriarien.trainingkaryawan.config;
+
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.context.annotation.Configuration;
 //import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;

@@ -1,6 +1,5 @@
-package com.fitriarien.trainingkaryawan.config;//package com.dibimbing.dibimbing.config;
-//
-//
+package com.fitriarien.trainingkaryawan.config;
+
 //import org.springframework.http.HttpStatus;
 //import org.springframework.web.bind.annotation.ResponseStatus;
 //

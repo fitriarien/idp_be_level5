@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
@@ -31,6 +32,7 @@ public class TrainingServiceImpl implements TrainingService {
     @Autowired
     private TrainingRepository trainingRepository;
 
+    @Transactional
     @Override
     public Training createTraining(CreateTrainingRequest request) {
         validationService.validate(request);
@@ -43,6 +45,7 @@ public class TrainingServiceImpl implements TrainingService {
         return createdTraining;
     }
 
+    @Transactional
     @Override
     public Training updateTraining(UpdateTrainingRequest request) {
         validationService.validate(request);
@@ -64,6 +67,7 @@ public class TrainingServiceImpl implements TrainingService {
         return trainingRepository.save(training);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Page<Training> getAll(int page, int size) {
         Pageable data = PageRequest.of(page,size, Sort.by(Sort.Order.asc("id")));
@@ -71,6 +75,7 @@ public class TrainingServiceImpl implements TrainingService {
         return list;
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Training getById(Long id) {
         Training training = trainingRepository.findById(id)
@@ -79,6 +84,7 @@ public class TrainingServiceImpl implements TrainingService {
         return training;
     }
 
+    @Transactional
     @Override
     public void delete(Long id) {
         Training training = trainingRepository.findById(id)
